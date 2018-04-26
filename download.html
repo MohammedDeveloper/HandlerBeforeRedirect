@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Download Check</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-light">
+
+    <div class="container">
+        <h2>
+            Download Check
+        </h2>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover">
+                    <thead>
+                        <th>Name</th>
+                        <th>Link</th>
+                    </thead>
+                    <tbody>
+                        <!-- DO YOUR FOREACH -->
+                        <!-- @foreach(var item in list) START -->
+                        <tr>
+                            <td>
+                                Mohammed Rafi
+                            </td>
+                            <td>
+                                <!--<a href="@Url.Action("File", "Download", new { invoiceNumber = item.InvoiceNumber, invoiceDate = item.Date  })"
+                                 class="downloadPDF" data-invoice="@item.InvoiceNumber" data-invoicedate="@item.Date">Download</a>-->
+                                <!-- MOCK HTML FOR EXAMPLE -->
+                                <a href="https://www.antennahouse.com/XSLsample/pdf/sample-link_1.pdf" class="downloadPDF" data-download="true" data-invoice="123456"
+                                    data-invoicedate="04/25/2018">
+                                    Download</a>
+                                <small>(Will download)</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Arun Prashath
+                            </td>
+                            <td>
+                                <!--<a href="@Url.Action("File", "Download", new { invoiceNumber = item.InvoiceNumber, invoiceDate = item.Date  })"
+                                 class="downloadPDF" data-invoice="@item.InvoiceNumber" data-invoicedate="@item.Date">Download</a>-->
+                                <!-- MOCK HTML FOR EXAMPLE -->
+                                <a href="http://www.pdf995.com/samples/pdf.pdf" class="downloadPDF" data-download="false" data-invoice="04858" data-invoicedate="04/05/2018">
+                                    Download</a>
+                                <small>(Will not download)</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Ramanan
+                            </td>
+                            <td>
+                                <!--<a href="@Url.Action("File", "Download", new { invoiceNumber = item.InvoiceNumber, invoiceDate = item.Date  })"
+                                     class="downloadPDF" data-invoice="@item.InvoiceNumber" data-invoicedate="@item.Date">Download</a>-->
+                                <!-- MOCK HTML FOR EXAMPLE -->
+                                <a href="http://www.orimi.com/pdf-test.pdf" class="downloadPDF" data-download="true" data-invoice="343423" data-invoicedate="06/25/2016">
+                                    Download</a>
+                                <small>(Will download)</small>
+                            </td>
+                        </tr>
+                        <!-- @foreach(var item in list) END -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        /// add event listener to the download PDF icon
+        $(".downloadPDF").click(function (ev) {
+
+            ev.preventDefault();
+            var invoiceNumber = event.target.getAttribute("data-invoice");
+            var invoiceDate = event.target.getAttribute("data-invoicedate");
+            var downloadUrl = event.target.getAttribute("href");
+            var isDataAvailable = false;
+
+            /// TODO: Remove
+            isDataAvailable = event.target.getAttribute("data-download") == "true" ? true : false;
+
+            /// TODO: Remove
+            console.log("Invoice Number: " + invoiceNumber);
+            console.log("Invoice Date: " + invoiceDate);
+            console.log("Invoice Download URL: " + downloadUrl);
+            console.log("Invoice Download Available: " + isDataAvailable);
+
+            /**
+            * MAKE AN AJAX CALL TO CHECK DATA IS THERE FOR THE invoiceNumber and invoiceDate using AJAX Call
+            * NOTE: ADD THIS PROP async: false in AJAX CALL and based on the response return TRUE or FALSE
+            * SET THIS IN success(function(result)) { isDataAvailable = true or false }
+            * SET THIS IN error(function(err)) { isDataAvailable = false }
+            */
+
+            /// check this
+            if (isDataAvailable)
+                window.location.href = downloadUrl;
+            else
+                alert("Sorry no data available to download for this Invoice");
+        });
+
+    </script>
+</body>
+
+</html>
